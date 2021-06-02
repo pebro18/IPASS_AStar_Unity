@@ -2,27 +2,31 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TwoDArrayExtentions;
 
 public class Grids : MonoBehaviour
 {
-    public LayerMask unWalkable;
+    public LayerMask UnWalkable;
     public Vector2 gridWorldSize;
     public float nodeRadius;
 
     private Node[,] Grid;
-
     private float nodeDiamater;
     private int XGridSize, YGridSize;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        // Calculates the radius of the grid system 
+        SetGridSize();
+        CreateGrid();
+    }
+
+    // Calculates the radius of the grid system 
+    private void SetGridSize()
+    {
         nodeDiamater = nodeRadius * 2;
         XGridSize = Mathf.RoundToInt(gridWorldSize.x / nodeDiamater);
         YGridSize = Mathf.RoundToInt(gridWorldSize.y / nodeDiamater);
-        CreateGrid();
     }
 
     // Create Nodes on the grid and check if there are obstuctions
@@ -36,7 +40,7 @@ public class Grids : MonoBehaviour
             for (int y = 0; y < YGridSize; y++)
             {
                 Vector3 worldPoint = WorldBottomLeft + Vector3.right * (x * nodeDiamater + nodeRadius) + Vector3.forward * (y * nodeDiamater + nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unWalkable));
+                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, UnWalkable));
                 Grid[x, y] = new Node(walkable, worldPoint);
             }
         }
@@ -45,6 +49,7 @@ public class Grids : MonoBehaviour
     // UI button function to reload Grid
     public void RegenGrid()
     {
+        SetGridSize();
         CreateGrid();
     }
 
@@ -60,6 +65,15 @@ public class Grids : MonoBehaviour
 
         int x = Mathf.RoundToInt((XGridSize - 1) * percentX);
         int y = Mathf.RoundToInt((YGridSize - 1) * percentY);
+        return Grid[x, y];
+    }
+
+    public Node GetDirectNeigborNode(Node _TargetNode, sbyte _XAxis, sbyte _YAxis)
+    {
+        (int x, int y) = Grid.GetIndexOf2D(_TargetNode);
+
+        x += _XAxis;
+        y += _YAxis;
         return Grid[x, y];
     }
 
