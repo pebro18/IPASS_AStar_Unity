@@ -68,13 +68,9 @@ public class Grids : MonoBehaviour
         return Grid[x, y];
     }
 
-    public Node GetDirectNeigborNode(Node _TargetNode, sbyte _XAxis, sbyte _YAxis)
+    public Node[,] GetGrid()
     {
-        (int x, int y) = Grid.GetIndexOf2D(_TargetNode);
-
-        x += _XAxis;
-        y += _YAxis;
-        return Grid[x, y];
+        return Grid;
     }
 
     // renders cubes to see in editor

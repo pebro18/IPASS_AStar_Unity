@@ -19,5 +19,13 @@ namespace TwoDArrayExtentions
             }
             return (-1,-1);
         }
+
+        public static T GetDirectNeigborNode<T>(this T[,] _grid, T _target, sbyte _XAxis, sbyte _YAxis) where T : class
+        {
+            (int x, int y) = _grid.GetIndexOf2D(_target);
+            x += _XAxis;
+            y += _YAxis;
+            return _grid[x, y];
+        }
     }
 }
