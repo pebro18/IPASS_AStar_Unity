@@ -25,7 +25,8 @@ namespace TwoDArrayExtentions
             (int x, int y) = _grid.GetIndexOf2D(_target);
             x += _XAxis;
             y += _YAxis;
-            return _grid[x, y];
+            if (_grid[x, y] != null && _target != _grid[x, y]) return _grid[x, y];
+            return null;             
         }
     }
 }
