@@ -68,14 +68,8 @@ public class Grids : MonoBehaviour
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
-        Debug.Log($"PercentX: {percentX}");
-        Debug.Log($"PercentY: {percentY}");
-
         int x = Mathf.RoundToInt((XGridSize - 1) * percentX) + XWorldNodePosOffset;
         int y = Mathf.RoundToInt((YGridSize - 1) * percentY) + YWorldNodePosOffset;
-
-        Debug.Log($"X: {x}");
-        Debug.Log($"Y: {y}");
         Node Output = Grid[x, y];
         return Output;
     }
