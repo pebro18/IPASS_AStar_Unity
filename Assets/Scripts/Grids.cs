@@ -14,6 +14,11 @@ public class Grids : MonoBehaviour
     private float nodeDiamater;
     private int XGridSize, YGridSize;
 
+    [SerializeField]
+    private int XWorldNodePosOffset = 0;
+    [SerializeField]
+    private int YWorldNodePosOffset = -3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,9 +68,16 @@ public class Grids : MonoBehaviour
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
-        int x = Mathf.RoundToInt((XGridSize - 1) * percentX);
-        int y = Mathf.RoundToInt((YGridSize - 1) * percentY);
-        return Grid[x, y];
+        Debug.Log($"PercentX: {percentX}");
+        Debug.Log($"PercentY: {percentY}");
+
+        int x = Mathf.RoundToInt((XGridSize - 1) * percentX) + XWorldNodePosOffset;
+        int y = Mathf.RoundToInt((YGridSize - 1) * percentY) + YWorldNodePosOffset;
+
+        Debug.Log($"X: {x}");
+        Debug.Log($"Y: {y}");
+        Node Output = Grid[x, y];
+        return Output;
     }
 
     public Node[,] GetGrid()
