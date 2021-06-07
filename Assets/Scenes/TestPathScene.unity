@@ -1989,14 +1989,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6455933047131442210, guid: 54f4b835154377e47837656edb267140, type: 3}
-      propertyPath: gridWorldSize.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6455933047131442210, guid: 54f4b835154377e47837656edb267140, type: 3}
-      propertyPath: gridWorldSize.y
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 6455933047131442211, guid: 54f4b835154377e47837656edb267140, type: 3}
       propertyPath: m_Name
       value: NodesGrid

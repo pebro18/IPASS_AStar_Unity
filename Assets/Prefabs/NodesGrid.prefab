@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6455933047131442210}
   m_Layer: 0
   m_Name: NodesGrid
-  m_TagString: Untagged
+  m_TagString: AIGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,5 +46,7 @@ MonoBehaviour:
   UnWalkable:
     serializedVersion: 2
     m_Bits: 64
-  gridWorldSize: {x: 60, y: 60}
+  gridWorldSize: {x: 100, y: 100}
   nodeRadius: 1
+  XWorldNodePosOffset: 0
+  YWorldNodePosOffset: -2
