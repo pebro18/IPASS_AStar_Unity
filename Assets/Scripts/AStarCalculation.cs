@@ -116,11 +116,11 @@ namespace AStar
 
         private static List<Node> GeneratePath(Dictionary<Node, Node> _cameFrom, Node _current)
         {
-            List<Node> GeneratePath = new List<Node>();
+            List<Node> GeneratePath = new List<Node>() { _current};
             while (_cameFrom.Keys.Contains(_current))
             {
                 _current = _cameFrom[_current];
-                GeneratePath.Prepend(_current);
+                GeneratePath.Insert(0,_current);
             }
             return GeneratePath;
         }
