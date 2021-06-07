@@ -37,7 +37,6 @@ public class Agent : MonoBehaviour
             {
                 GoToTarget(Hit.point);
             }
-
         }
     }
 

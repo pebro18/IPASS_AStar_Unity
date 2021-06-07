@@ -71,7 +71,6 @@ namespace AStar
         {
             Node Output = null;
             float lowestValue = float.MaxValue;
-            //var min = _fScore.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
             foreach (var item in _openSet)
             {
                 if (_fScore[item] < lowestValue)
@@ -80,7 +79,6 @@ namespace AStar
                     Output = item;
                 }
             }
-
             return Output;
         }
 
