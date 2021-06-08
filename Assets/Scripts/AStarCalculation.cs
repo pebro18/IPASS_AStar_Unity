@@ -34,7 +34,7 @@ namespace AStar
                 foreach (var neighbor in DirectNeighborNode)
                 {
                     float Tentative_gScore = gScore[Current] + D(Current, neighbor);
-                    if (Tentative_gScore < gScore[neighbor])
+                    if (Tentative_gScore < gScore[neighbor] && neighbor.Walkable)
                     {
                         cameFrom[neighbor] = Current;
                         gScore[neighbor] = Tentative_gScore;
@@ -84,7 +84,6 @@ namespace AStar
 
         // D(current,neighbor) is the weight of the edge from current to neighbor
         // tentative_gScore is the distance from start to the neighbor through current
-
         // God IDK what this means ^^^^
         private static float D(Node current, Node neighbor)
         {
