@@ -30,10 +30,9 @@ public class Agent : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            RaycastHit Hit;
             Ray Ray = Cam.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(Ray, out Hit))
+            if (Physics.Raycast(Ray, out RaycastHit Hit))
             {
                 GoToTarget(Hit.point);
             }

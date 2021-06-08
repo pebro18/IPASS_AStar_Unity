@@ -10,16 +10,27 @@ namespace AStar
     {
         // for pseudocode
         // https://en.wikipedia.org/wiki/A*_search_algorithm
+
+        /// <summary>
+        /// Main function for Astar Calculation.
+        /// </summary>
+        /// <param name="_grid"></param>
+        /// <param name="_start"></param>
+        /// <param name="_end"></param>
+        /// <returns>
+        /// Success: returns a List of Nodes.
+        /// Failure: returns null.
+        /// </returns>
         public static List<Node> AStar(Node[,] _grid, Node _start, Node _end)
         {
             HashSet<Node> openSet = new HashSet<Node>() { _start };
             Dictionary<Node, Node> cameFrom = new Dictionary<Node, Node>();
 
-            Dictionary<Node, float> gScore = Turn2DArrayToDict(_grid, float.MaxValue);
+            Dictionary<Node, float> gScore = Turn2DArrayToDict(_grid);
             gScore[_start] = 0;
 
-            Dictionary<Node, float> fScore = Turn2DArrayToDict(_grid, float.MaxValue);
-            fScore[_start] = H(_start, _end);
+            Dictionary<Node, float> fScore = Turn2DArrayToDict(_grid);
+            fScore[_start] = DistanceBetween2Nodes(_start, _end);
 
             while (openSet.Count != 0)
             {
@@ -30,15 +41,15 @@ namespace AStar
                     return GeneratePath(cameFrom, Current);
                 }
 
-                Node[] DirectNeighborNode = GetCurrentNeighborsArray(_grid, Current);
+                Node[] DirectNeighborNode = _grid.GetDirectNeigborNodes(Current);
                 foreach (var neighbor in DirectNeighborNode)
                 {
-                    float Tentative_gScore = gScore[Current] + D(Current, neighbor);
+                    float Tentative_gScore = gScore[Current] + DistanceBetween2Nodes(Current, neighbor);
                     if (Tentative_gScore < gScore[neighbor] && neighbor.Walkable)
                     {
                         cameFrom[neighbor] = Current;
                         gScore[neighbor] = Tentative_gScore;
-                        fScore[neighbor] = gScore[neighbor] + H(neighbor, _end);
+                        fScore[neighbor] = gScore[neighbor] + DistanceBetween2Nodes(neighbor, _end);
                         if (!openSet.Contains(neighbor))
                         {
                             openSet.Add(neighbor);
@@ -50,23 +61,14 @@ namespace AStar
             return null;
         }
 
-        private static Node[] GetCurrentNeighborsArray(Node[,] _grid, Node _target)
-        {
-            List<Node> Output = new List<Node>();
-            for (sbyte x = -1; x < 2; x++)
-            {
-                for (sbyte y = -1; y < 2; y++)
-                {
-                    Node Neighbor = _grid.GetDirectNeigborNode(_target, x, y);
-                    if (Neighbor != null)
-                    {
-                        Output.Add(Neighbor);
-                    }
-                }
-            }
-            return Output.ToArray();
-        }
-
+        /// <summary>
+        /// Looks for the node with the lowest score that is available in the openSet
+        /// </summary>
+        /// <param name="_openSet"></param>
+        /// <param name="_fScore"></param>
+        /// <returns>
+        /// Node with the lowest fScore in openSet
+        /// </returns>
         private static Node GetNodeWithLowestScore(HashSet<Node> _openSet, Dictionary<Node, float> _fScore)
         {
             Node Output = null;
@@ -82,22 +84,29 @@ namespace AStar
             return Output;
         }
 
-        // D(current,neighbor) is the weight of the edge from current to neighbor
-        // tentative_gScore is the distance from start to the neighbor through current
-        // God IDK what this means ^^^^
-        private static float D(Node current, Node neighbor)
-        {
-            float Distance = Vector3.Distance(current.WorldPosition, neighbor.WorldPosition);
-            return (float)Math.Round(Distance, 2);
-        }
-
-        private static float H(Node _start, Node _end)
+        /// <summary>
+        /// Returns the distance between 2 nodes using the Nodes worldposition variable
+        /// </summary>
+        /// <param name="_start"></param>
+        /// <param name="_end"></param>
+        /// <returns>
+        /// The distance of the 2 nodes as a float
+        /// </returns>
+        private static float DistanceBetween2Nodes(Node _start, Node _end)
         {
             float Heuristic = Vector3.Distance(_start.WorldPosition, _end.WorldPosition);
             return (float)Math.Round(Heuristic, 2);
         }
 
-        private static Dictionary<Node, float> Turn2DArrayToDict(Node[,] _grid, float _default)
+        /// <summary>
+        /// Turn a 2D array into a Dict<Node,float> where an unspecified default inserts the float max value
+        /// </summary>
+        /// <param name="_grid"></param>
+        /// <param name="_default"></param>
+        /// <returns>
+        /// Dictionary<Node,float> from 2D array
+        /// </returns>
+        private static Dictionary<Node, float> Turn2DArrayToDict(Node[,] _grid, float _default = float.MaxValue)
         {
             Dictionary<Node, float> OutputDict = new Dictionary<Node, float>();
 
@@ -111,6 +120,14 @@ namespace AStar
             return OutputDict;
         }
 
+        /// <summary>
+        /// Generates path by essentially back tracking from current node
+        /// </summary>
+        /// <param name="_cameFrom"></param>
+        /// <param name="_current"></param>
+        /// <returns>
+        /// List<Node> Path
+        /// </returns>
         private static List<Node> GeneratePath(Dictionary<Node, Node> _cameFrom, Node _current)
         {
             List<Node> GeneratePath = new List<Node>() { _current};

@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Simple class that holds its position in the world and walkability
+/// </summary>
 public class Node
 {
     public bool Walkable;
