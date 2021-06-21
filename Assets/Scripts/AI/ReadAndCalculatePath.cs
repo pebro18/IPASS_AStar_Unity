@@ -24,24 +24,59 @@ public class ReadAndCalculatePath : MonoBehaviour
 
     public void LoadPositions()
     {
-        List<Vector3> Positions = new List<Vector3>();
+        List<Vector3> FoundPositions = new List<Vector3>();
+
         foreach (var input in dataPassObj.Inputs)
         {
             foreach (var gameObj in POIs)
             {
                 if (gameObj.name == input)
                 {
-                    Positions.Add(gameObj.transform.position);
+                    FoundPositions.Add(gameObj.transform.position);
                 }
             }
         }
 
+        GreedyFirstSort(FoundPositions);
+    }
+
+    private void GreedyFirstSort(List<Vector3> FoundPositions)
+    {
+        List<Vector3> Positions = new List<Vector3>();
+        int Count = FoundPositions.Count;
+        Vector3 Current = StartingPos;
+        for (int i = 0; i < Count; i++)
+        {
+            Vector3 smallestDistance = GetVector3WithSmallestDistance(Current, FoundPositions);
+            Positions.Add(smallestDistance);
+            FoundPositions.Remove(smallestDistance);
+            Current = smallestDistance;
+        }
         StartPathsCalculation(Positions);
+    }
+
+    Vector3 GetVector3WithSmallestDistance(Vector3 Target, List<Vector3> Positions)
+    {
+        Vector3 smallestDistance = Vector3.zero;
+        float minDistance = float.MaxValue;
+        foreach (var pos in Positions)
+        {
+
+            float Heuristic = Vector3.Distance(Target, pos);
+            if (pos == Target) break;
+
+            if (Heuristic < minDistance)
+            {
+                smallestDistance = pos;
+                minDistance = Heuristic;
+            }
+        }
+        return smallestDistance;
     }
 
     void StartPathsCalculation(List<Vector3> PositionsArray)
     {
-        Paths = new List<Node>[PositionsArray.Count+1];
+        Paths = new List<Node>[PositionsArray.Count + 1];
         Node CurrentPos = GridObj.NodeFromWorldPoint(StartingPos);
         Node TargetPos = GridObj.NodeFromWorldPoint(PositionsArray[0]);
 
@@ -49,7 +84,7 @@ public class ReadAndCalculatePath : MonoBehaviour
 
         if (PositionsArray.Count == 1)
         {
-            Paths[1] = AStarCalculation.AStar(GridObj.GetGrid(), CurrentPos, TargetPos);
+            Paths[1] = AStarCalculation.AStar(GridObj.GetGrid(), TargetPos, GridObj.NodeFromWorldPoint(EndingPos));
         }
         else
         {

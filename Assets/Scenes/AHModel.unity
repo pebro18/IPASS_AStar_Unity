@@ -1408,6 +1408,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1753867383963325479, guid: cbc311fa92384334db476c259525ffec, type: 3}
+      propertyPath: dataPassObj
+      value: 
+      objectReference: {fileID: 11400000, guid: aceac919599403d4ca82003e046e1b3c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc311fa92384334db476c259525ffec, type: 3}
 --- !u!1 &528808228
@@ -5013,6 +5017,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   XSpeed: -3
   YSpeed: 3
+  TopBoundry: {x: 0, y: 0, z: 0}
+  BottomBoundry: {x: 0, y: 0, z: 0}
 --- !u!1 &1613478444
 GameObject:
   m_ObjectHideFlags: 0
