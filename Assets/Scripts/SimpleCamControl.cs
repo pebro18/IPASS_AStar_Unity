@@ -6,8 +6,10 @@ using UnityEngine;
 public class SimpleCamControl : MonoBehaviour
 {
     private Camera MainCam;
-    [Range(0, 25)]
-    public float Speed = 3;
+    [Range(-25, 25)]
+    public float XSpeed = 3;
+    [Range(-25, 25)]
+    public float YSpeed = 3;
 
     void Start()
     {
@@ -18,9 +20,9 @@ public class SimpleCamControl : MonoBehaviour
     void Update()
     {
         // receives inputs from WASD and Scrollwheel and multiplies the values with Speed variable
-        float UpDown = Speed * Input.GetAxis("Vertical");
-        float SideWays = Speed * Input.GetAxis("Horizontal");
-        float Scroll = Speed * Input.mouseScrollDelta.y * -1;
+        float UpDown = XSpeed * Input.GetAxis("Horizontal");
+        float SideWays = YSpeed * Input.GetAxis("Vertical");
+        float Scroll = YSpeed * Input.mouseScrollDelta.y * -1;
 
         // inputs variables above to the used components
         MainCam.orthographicSize += Scroll;
