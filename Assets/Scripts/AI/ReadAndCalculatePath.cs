@@ -20,9 +20,11 @@ public class ReadAndCalculatePath : MonoBehaviour
         _LineRenderer = GetComponent<LineRenderer>();
 
         LoadPositions();
+        RenderPath();
+
     }
 
-    public void LoadPositions()
+    private void LoadPositions()
     {
         List<Vector3> FoundPositions = new List<Vector3>();
 
@@ -96,7 +98,7 @@ public class ReadAndCalculatePath : MonoBehaviour
                 Paths[i + 1] = AStarCalculation.AStar(GridObj.GetGrid(), CurrentPos, TargetPos);
             }
         }
-        RenderPath();
+
     }
 
     void RenderPath()
@@ -120,6 +122,12 @@ public class ReadAndCalculatePath : MonoBehaviour
                 lineIndex++;
             }
         }
+    }
+
+    public void ReloadPath()
+    {
+        LoadPositions();
+        RenderPath();
     }
 
     private void OnDrawGizmosSelected()
