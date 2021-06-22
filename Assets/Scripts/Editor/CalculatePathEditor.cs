@@ -12,7 +12,7 @@ public class CalculatePathEditor : Editor
         ReadAndCalculatePath PathCalculate = (ReadAndCalculatePath)target;
         if (GUILayout.Button("Regen LineRenderer"))
         {
-            PathCalculate.LoadPositions();
+            PathCalculate.ReloadPath();
         }
     }
 }
