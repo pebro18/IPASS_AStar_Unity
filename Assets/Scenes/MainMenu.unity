@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputString: 
   Input: {fileID: 1737730857}
-  ScriptableObj: {fileID: 11400000, guid: d8e51bd95cc31014baf921c77da2ab26, type: 2}
+  ScriptableObj: {fileID: 11400000, guid: aceac919599403d4ca82003e046e1b3c, type: 2}
 --- !u!1 &104067151
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,7 +3171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputString: 
   Input: {fileID: 958489412}
-  ScriptableObj: {fileID: 11400000, guid: d8e51bd95cc31014baf921c77da2ab26, type: 2}
+  ScriptableObj: {fileID: 11400000, guid: aceac919599403d4ca82003e046e1b3c, type: 2}
 --- !u!1 &1541522263
 GameObject:
   m_ObjectHideFlags: 0
