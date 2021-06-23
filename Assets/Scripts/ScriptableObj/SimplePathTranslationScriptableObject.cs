@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class object used as a ScriptableObject
+/// </summary>
 [CreateAssetMenu(fileName = "PassingData", menuName = "SimplePathDataPassing")]
 public class SimplePathTranslationScriptableObject : ScriptableObject
 {

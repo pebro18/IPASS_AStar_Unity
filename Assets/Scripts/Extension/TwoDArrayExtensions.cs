@@ -2,7 +2,9 @@ using System.Collections.Generic;
 
 namespace TwoDArrayExtentions
 {
-    // Extra custom methods for 2D arrays
+    /// <summary>
+    /// Extra custom methods for 2D arrays
+    /// </summary>
     public static class TwoDArrayExtensions
     {
         /// <summary>
@@ -15,7 +17,7 @@ namespace TwoDArrayExtentions
         /// Succes: Index of target from 2D array
         /// Failure: -1,-1 aka null.
         /// </returns>
-        // cant write null or 0,0 in this case
+        /// <remarks>cant write null or 0,0 in this case</remarks>
         public static (int, int) GetIndexOf2D<T>(this T[,] _grid, T _target) where T : class
         {
             // linear search this could be better with something like binary search
