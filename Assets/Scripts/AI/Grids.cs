@@ -96,6 +96,11 @@ public class Grids : MonoBehaviour
         return Grid;
     }
 
+    private void OnEnable()
+    {
+        RegenGrid();
+    }
+
     // renders cubes to see in editor
     private void OnDrawGizmos()
     {

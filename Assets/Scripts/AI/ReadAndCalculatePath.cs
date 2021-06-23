@@ -153,6 +153,11 @@ public class ReadAndCalculatePath : MonoBehaviour
         RenderPath();
     }
 
+    private void OnEnable()
+    {
+        ReloadPath();
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (Paths != null)
