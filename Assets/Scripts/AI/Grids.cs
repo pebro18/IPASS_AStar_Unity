@@ -2,12 +2,12 @@ using UnityEngine;
 
 /// <summary>
 /// An mayor component for the AI and Pathfinding.
-/// This script has to be assigned as an component in a GameObject to integrate allow pathfinding to function
+/// This script has to be assigned as an component in a GameObject to allow pathfinding to function
 /// </summary>
 public class Grids : MonoBehaviour
 {
     public LayerMask UnWalkable;
-    public Vector2 gridWorldSize;
+    public Vector2 gridWorldSize = new Vector2(1,1);
     public float nodeRadius;
 
     private Node[,] Grid;
