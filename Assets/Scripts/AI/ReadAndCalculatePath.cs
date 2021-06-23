@@ -24,6 +24,9 @@ public class ReadAndCalculatePath : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Load the positions of POI from the dataPassObj scriptableobject
+    /// </summary>
     private void LoadPositions()
     {
         List<Vector3> FoundPositions = new List<Vector3>();
@@ -41,7 +44,11 @@ public class ReadAndCalculatePath : MonoBehaviour
 
         GreedyFirstSort(FoundPositions);
     }
-
+    /// <summary>
+    /// Sorts the Positions list based on the shortest distance.
+    /// Based on greedy first.
+    /// </summary>
+    /// <param name="FoundPositions"></param>
     private void GreedyFirstSort(List<Vector3> FoundPositions)
     {
         List<Vector3> Positions = new List<Vector3>();
@@ -57,6 +64,12 @@ public class ReadAndCalculatePath : MonoBehaviour
         StartPathsCalculation(Positions);
     }
 
+    /// <summary>
+    /// Find the closest position from Target and the availible positions
+    /// </summary>
+    /// <param name="Target"></param>
+    /// <param name="Positions"></param>
+    /// <returns>Returns the closest position from target</returns>
     Vector3 GetVector3WithSmallestDistance(Vector3 Target, List<Vector3> Positions)
     {
         Vector3 smallestDistance = Vector3.zero;
@@ -76,6 +89,10 @@ public class ReadAndCalculatePath : MonoBehaviour
         return smallestDistance;
     }
 
+    /// <summary>
+    /// Calculates all paths given by Positions list
+    /// </summary>
+    /// <param name="PositionsArray"></param>
     void StartPathsCalculation(List<Vector3> PositionsArray)
     {
         Paths = new List<Node>[PositionsArray.Count + 1];
@@ -101,6 +118,9 @@ public class ReadAndCalculatePath : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Renders the path with use of the linerenderer
+    /// </summary>
     void RenderPath()
     {
         int pointsAmount = 0;
@@ -123,7 +143,10 @@ public class ReadAndCalculatePath : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Reloads the whole path.
+    /// used if are variables changed
+    /// </summary>
     public void ReloadPath()
     {
         LoadPositions();

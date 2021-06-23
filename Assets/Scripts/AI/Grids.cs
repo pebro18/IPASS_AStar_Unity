@@ -1,9 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TwoDArrayExtentions;
 
+/// <summary>
+/// An mayor component for the AI and Pathfinding.
+/// This script has to be assigned as an component in a GameObject to integrate allow pathfinding to function
+/// </summary>
 public class Grids : MonoBehaviour
 {
     public LayerMask UnWalkable;
@@ -26,7 +26,9 @@ public class Grids : MonoBehaviour
         CreateGrid();
     }
 
-    // Calculates the radius of the grid system 
+    /// <summary>
+    /// Calculates the NodeDiameter and grid size based on gridWorldSize and nodeRadius.
+    /// </summary>
     private void SetGridSize()
     {
         nodeDiamater = nodeRadius * 2;
@@ -34,7 +36,9 @@ public class Grids : MonoBehaviour
         YGridSize = Mathf.RoundToInt(gridWorldSize.y / nodeDiamater);
     }
 
-    // Create Nodes on the grid and check if there are obstuctions
+    /// <summary>
+    /// Create Nodes on the grid based on the variables set by SetGridSize and checks if there are obstuctions
+    /// </summary>
     private void CreateGrid()
     {
         Grid = new Node[XGridSize, YGridSize];
@@ -51,15 +55,24 @@ public class Grids : MonoBehaviour
         }
     }
 
-    // UI button function to reload Grid
+    /// <summary>
+    /// Public method to reload the grid if changes are made
+    /// </summary>
     public void RegenGrid()
     {
         SetGridSize();
         CreateGrid();
     }
 
-    // gets node based on world position
-    // is needed later
+    /// <summary>
+    /// Returns a node based on the position given.
+    /// </summary>
+    /// <param name="worldPosition"></param>
+    /// <returns>Node that corresponds to the worldposition given</returns>
+    /// <remarks>
+    /// There is a rounding issue when calling this function.
+    /// Use XWorldNodePosOffset and YWorldNodePosOffset to offset any rounding error made.
+    /// </remarks>
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
         float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
@@ -74,6 +87,10 @@ public class Grids : MonoBehaviour
         return Output;
     }
 
+    /// <summary>
+    /// Gets the grid variable when called
+    /// </summary>
+    /// <returns>Node[,] containing the level's nodes</returns>
     public Node[,] GetGrid()
     {
         return Grid;

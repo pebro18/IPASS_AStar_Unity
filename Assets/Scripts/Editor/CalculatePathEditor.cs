@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Editor Script
+/// Adds custom UI at the editor side for easier testing and control
+/// </summary>
 [CustomEditor(typeof(ReadAndCalculatePath))]
 public class CalculatePathEditor : Editor
 {
